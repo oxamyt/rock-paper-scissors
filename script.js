@@ -3,7 +3,7 @@ let answers = ['rock', 'paper', 'scissors']
 return answers[Math.floor(Math.random()*answers.length)]
 }
 
-const playerSelection = prompt('Choose a tool').toLowerCase();
+const playerSelection = prompt('Choose a tool').toLowerCase().trim();
 const computerSelection = getComputerChoice();
 
 function playRound(playerSelection, computerSelection){
@@ -25,7 +25,7 @@ function playRound(playerSelection, computerSelection){
    else if (playerSelection == 'scissors' && computerSelection == 'paper'){
       alert('you win')
    }
-   else if (playerSelection != ['rock', 'paper', 'scissors'] ){
+   else if (playerSelection !== 'rock' && playerSelection !==  'paper' && playerSelection !== 'scissors'){
       alert ('wrong type')
    }
    else {
@@ -34,8 +34,6 @@ function playRound(playerSelection, computerSelection){
 
 }
 
-function game(){
-   
-}
 
-playRound(playerSelection, computerSelection);
+
+playRound(playerSelection, computerSelection)
