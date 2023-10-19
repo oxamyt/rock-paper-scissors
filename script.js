@@ -1,90 +1,133 @@
 // computer answer
 function getComputerChoice (){
-let answers = ['rock', 'paper', 'scissors']
-return answers[Math.floor(Math.random()*answers.length)]
-}
+   let answers = ['rock', 'paper', 'scissors']
+   return answers[Math.floor(Math.random()*answers.length)]
+   }
+   
+   // variables
+   let userWin = 'You Win!';
+   let computerWin = 'Computer Wins!';
+   let draw = 'Draw!';
+   let playerScore = 0;
+   let computerScore = 0;
+   let draws = 0;
+   let rock = document.querySelector('#rck');
+   let paper = document.querySelector('#pap');
+   let scissors = document.querySelector('#srs');
+   
+   
+   
+   
+   // Events
+   rock.addEventListener ('click', () => {
+      const computerSelection = getComputerChoice();
+      const resultRound = playRound('rock', computerSelection);
+      updResult(resultRound);
+      if (resultRound === userWin){
+         playerScore++;
+      }
+      else if(resultRound === computerWin){
+         computerScore++;
+      }
+      else if(resultRound === draw){
+         draws++;
+      }
+      score ();
+      matchResult();
+   })
+   paper.addEventListener ('click', () => {
+      const computerSelection = getComputerChoice();
+      const resultRound = playRound('paper', computerSelection);
+      updResult(resultRound);
+      if (resultRound === userWin){
+         playerScore++;
+      }
+      else if(resultRound === computerWin){
+         computerScore++;
+      }
+      else if(resultRound === draw){
+         draws++;
+      }
+      score ();
+      matchResult();
+   })
+   scissors.addEventListener ('click', () => {
+      const computerSelection = getComputerChoice();
+      const resultRound = playRound('scissors', computerSelection);
+      updResult(resultRound);
+      if (resultRound === userWin){
+         playerScore++;
+      }
+      else if(resultRound === computerWin){
+         computerScore++;
+      }
+      else if(resultRound === draw){
+         draws++;
+      }
+      score ();
+      matchResult();
+   })
 
-// variables
-let userWin = 'You Win!';
-let computerWin = 'Computer Wins!';
-let draw = 'Draw!';
-let playerScore = 0;
-let computerScore = 0;
-let draws = 0;
 
-// game function
-function playRound(playerSelection, computerSelection){
-   if (playerSelection == 'rock' && computerSelection == 'paper'){
-      alert ('You Lost!');
-      return computerWin;
+   // match result function
+   function matchResult (){
+   const matchResult = document.querySelector('#match-result');
+      if (playerScore >= 5){
+        matchResult.textContent = 'Player Wins the match!';
+      }
+      else if (computerScore >= 5){
+         matchResult.textContent = 'Computer Wins the match!';
+      }
+      else if (draws >= 5){
+         matchResult.textContent = 'Epic match Draw!';
+      }
    }
-   else if (playerSelection == 'rock' && computerSelection == 'scissors'){
-      alert ('You Win!');
-      return userWin;
+   
+   // score function
+   function score (){
+      const rscore = document.querySelector('#score')
+      rscore.textContent = `Score : Player score ${playerScore}, Computer score ${computerScore}, Draws ${draws}`
    }
-   else if (playerSelection == 'paper' && computerSelection == 'scissors'){
-      alert ('You Lost!');
-      return computerWin;
+   
+   // result function
+   function updResult (resultRound){
+   const roundResult = document.querySelector('#round-result')
+      roundResult.textContent = `Result : ${resultRound}`; 
    }
-   else if (playerSelection == 'paper' && computerSelection == 'rock'){
-      alert ('You Win!');
-      return userWin;
+   
+   // game function
+   function playRound(playerSelection, computerSelection){
+      if (playerSelection == 'rock' && computerSelection == 'paper'){
+   
+         return computerWin;
+      }
+      else if (playerSelection == 'rock' && computerSelection == 'scissors'){
+   
+         return userWin;
+      }
+      else if (playerSelection == 'paper' && computerSelection == 'scissors'){
+   
+         return computerWin;
+      }
+      else if (playerSelection == 'paper' && computerSelection == 'rock'){
+   
+         return userWin;
+      }
+      else if (playerSelection == 'scissors' && computerSelection == 'rock'){
+   
+         return computerWin;
+      }
+      else if (playerSelection == 'scissors' && computerSelection == 'paper'){
+   
+         return userWin;
+      }
+      else if (playerSelection !== 'rock' && playerSelection !==  'paper' && playerSelection !== 'scissors'){
+         alert ('wrong type');
+      }
+      else {
+   
+         return draw;
+      }
+   
    }
-   else if (playerSelection == 'scissors' && computerSelection == 'rock'){
-      alert ('You Lost!');
-      return computerWin;
-   }
-   else if (playerSelection == 'scissors' && computerSelection == 'paper'){
-      alert ('You Win!');
-      return userWin;
-   }
-   else if (playerSelection !== 'rock' && playerSelection !==  'paper' && playerSelection !== 'scissors'){
-      alert ('wrong type');
-   }
-   else {
-      alert ('draw')
-      return draw;
-   }
-
-}
-
-function game(){
-const playerSelection = prompt('Choose a tool').toLowerCase().trim();
-const computerSelection = getComputerChoice();
-const result = playRound(playerSelection, computerSelection);
-
-if (result === userWin){
-   playerScore++;
-}
-else if(result === computerWin){
-   computerScore++;
-}
-else if(result === draw){
-   draws++;
-}
-console.log(`Player Score ${playerScore}`);
-console.log(`Computer Score ${computerScore}`);
-console.log(`Draws ${draws}`);
-
-if (playerScore >= 5 || computerScore >= 5 || draws >=5){
-   gameScore(playerScore, computerScore, draws)
-}
-else {
-   game()
-}
-
-} 
-
-function gameScore(playerScore, computerScore, draws){
-   if (playerScore >= 5){
-      console.log('You have won the game!')
-   }
-   else if (computerScore >= 5){
-      console.log('Computer have won the game!')
-   }
-   else if (draws >= 5){
-      console.log('GREAT DRAW')
-   }
-}
-
-game();
+   
